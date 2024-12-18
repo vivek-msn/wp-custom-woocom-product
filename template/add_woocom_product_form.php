@@ -23,7 +23,9 @@
         <input type="text" id="sku" name="wcp_sku" placeholder="Enter SKU" required>
 
         <label for="product_image">Product Image:</label>
-        <button type="button" name="btn_upload_product_image">Upload Product Image</button>
+        <button type="button" id="btn_upload_product_image">Upload Product Image</button>
+        <input type="hidden" name="product_media_id" id="product_media_id">
+        <img src="" alt="" class="src alt" id="product_image_preview" style="height: 100px; width:100px;">
 
         <button type="submit" name="btn_submit_woocom_product">Submit</button>
     </form>

@@ -39,7 +39,13 @@
 
  function wcp_add_stylesheet(){
 
+   // Stylesheet
    wp_enqueue_style("wcp-style", plugin_dir_url(__FILE__) . "assets/style.css", array());
+
+   wp_enqueue_media();
+
+   // Add js
+   wp_enqueue_script("wcp-script", plugin_dir_url(__FILE__) . "assets/script.js", array('jquery'));
  }
 
 
@@ -82,10 +88,15 @@ function wcp_handle_add_product_form_submit(){
          $productObject->set_short_description($_POST['wcp_short_description']);
          $productObject->set_sku($_POST['wcp_sku']);
          $productObject->set_status("publish");
-         
-         $productObject->save();
+         $productObject->set_image_id($_POST['product_media_id']);
+         $product_id = $productObject->save();
 
-         echo '<div class="notice notice-success"> <p>Successfully, product has been created</p> </div>';
+         if($product_id > 0){
+            add_action("admin_notices", function(){
+               echo '<div class="notice notice-success"> <p>Successfully, product has been created</p> </div>';
+            });
+         }
+         
       }
    }
 }
